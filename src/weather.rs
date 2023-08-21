@@ -1,5 +1,6 @@
 use reqwest::Client;
 use serde::Deserialize;
+use thiserror::Error;
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "PascalCase")]
@@ -35,20 +36,13 @@ pub struct Headline {
 
 use std::fmt::Display;
 
-use crate::Error;
+use anyhow::Error;
 
-#[derive(Debug)]
-pub struct CouldNotFindLocation {
-    place: String,
+#[derive(Error, Debug)]
+enum WeatherError {
+    #[error("Could not find location '{place}'")]
+    CouldNotFindLocation { place: String },
 }
-
-impl Display for CouldNotFindLocation {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Could not find location '{}'", self.place)
-    }
-}
-
-impl std::error::Error for CouldNotFindLocation {}
 
 pub async fn get_forecast(
     place: &str,
@@ -73,17 +67,18 @@ pub async fn get_forecast(
 
     // Get the first location. If empty respond with the above declared
     // `CouldNotFindLocation` error type
-    let first_location = resp
-        .into_iter()
-        .next()
-        .ok_or_else(|| CouldNotFindLocation {
-            place: place.to_owned(),
-        })?;
+    let first_location =
+        resp.into_iter()
+            .next()
+            .ok_or_else(|| WeatherError::CouldNotFindLocation {
+                place: place.to_owned(),
+            })?;
 
     // Now have the location combine the key/identifier with the URL
     let url = format!("{}{}?apikey={}", DAY_REQUEST, first_location.key, api_key);
 
     let request = client.get(url).build().unwrap();
+
     let forecast = client.execute(request).await?.json::<Forecast>().await?;
 
     // Combine the location with the foreact

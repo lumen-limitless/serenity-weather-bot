@@ -934,6 +934,7 @@ dependencies = [
  "shuttle-runtime",
  "shuttle-secrets",
  "shuttle-serenity",
+ "thiserror",
  "tokio",
  "tracing",
 ]
