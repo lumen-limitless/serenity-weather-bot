@@ -23,9 +23,8 @@ pub async fn weather(
         Ok((location, forecast)) => {
             let _ = ctx
                 .send(|m| {
-                    m.content("Weather for: ");
                     m.embed(|e| {
-                        e.title(location);
+                        e.title(format!("Weather forecast for {}", location));
                         e.description(forecast.headline.overview);
                         e.footer(|f| f.text("Powered by AccuWeather"));
                         e.color(0x00ff00);
