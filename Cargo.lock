@@ -248,6 +248,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "colored"
+version = "2.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2674ec482fbc38012cf31e6c42ba0177b431a0cb6f15fe40efa5aab1bda516f6"
+dependencies = [
+ "is-terminal",
+ "lazy_static",
+ "windows-sys",
+]
+
+[[package]]
+name = "comfy-table"
+version = "6.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7e959d788268e3bf9d35ace83e81b124190378e4c91c9067524675e33394b8ba"
+dependencies = [
+ "crossterm 0.26.1",
+ "strum",
+ "strum_macros",
+ "unicode-width",
+]
+
+[[package]]
 name = "core-foundation"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -298,6 +321,47 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5a22b2d63d4d1dc0b7f1b6b2747dd0088008a9be28b6ddf0b1e7d335e3037294"
 dependencies = [
  "cfg-if",
+]
+
+[[package]]
+name = "crossterm"
+version = "0.26.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a84cda67535339806297f1b331d6dd6320470d2a0fe65381e79ee9e156dd3d13"
+dependencies = [
+ "bitflags 1.3.2",
+ "crossterm_winapi",
+ "libc",
+ "mio",
+ "parking_lot",
+ "signal-hook",
+ "signal-hook-mio",
+ "winapi",
+]
+
+[[package]]
+name = "crossterm"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f476fe445d41c9e991fd07515a6f463074b782242ccf4a5b7b1d1012e70824df"
+dependencies = [
+ "bitflags 2.4.0",
+ "crossterm_winapi",
+ "libc",
+ "mio",
+ "parking_lot",
+ "signal-hook",
+ "signal-hook-mio",
+ "winapi",
+]
+
+[[package]]
+name = "crossterm_winapi"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "acdd7c62a3665c7f6830a51635d9ac9b23ed385797f70a83bb8bafe9c572ab2b"
+dependencies = [
+ "winapi",
 ]
 
 [[package]]
@@ -394,6 +458,12 @@ name = "doc-comment"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fea41bba32d969b513997752735605054bc0dfa92b4c56bf1189f2e174be7a10"
+
+[[package]]
+name = "dunce"
+version = "1.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "56ce8c6da7551ec6c462cbaf3bfbc75131ebbfa1c944aeaa9dab51ca1c5f0c3b"
 
 [[package]]
 name = "either"
@@ -844,6 +914,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28b29a3cd74f0f4598934efe3aeba42bae0eb4680554128851ebbecb02af14e6"
 
 [[package]]
+name = "is-terminal"
+version = "0.4.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb0889898416213fab133e1d33a0e5858a48177452750691bde3666d0fdbaf8b"
+dependencies = [
+ "hermit-abi",
+ "rustix",
+ "windows-sys",
+]
+
+[[package]]
 name = "itertools"
 version = "0.10.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -992,6 +1073,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "927a765cd3fc26206e66b296465fa9d3e5ab003e651c1b3c060e7956d96b19d2"
 dependencies = [
  "libc",
+ "log",
  "wasi",
  "windows-sys",
 ]
@@ -1733,6 +1815,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "semver"
+version = "1.0.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad977052201c6de01a8ef2aa3378c4bd23217a056337d1d6da40468d267a4fb0"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "serde"
 version = "1.0.183"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1850,9 +1941,9 @@ dependencies = [
 
 [[package]]
 name = "shuttle-codegen"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c98aa9ad7b2058e8c9f5a2756503966aec238cf7ec31093a437f468e6242f176"
+checksum = "b4ee9844e18c0f10289d3c50de14b3838938a6b3eb7379edb2cf6c03f8fe4526"
 dependencies = [
  "proc-macro-error",
  "proc-macro2",
@@ -1862,15 +1953,17 @@ dependencies = [
 
 [[package]]
 name = "shuttle-common"
-version = "0.24.0"
+version = "0.28.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c23f31b5227a86de62657dde1130af96b9536bdd9708a19b66d45698a81364fd"
+checksum = "4062f00c2aec0987ab4e58a2ef9b23b241a6760e9d04f8c02d360652ad174720"
 dependencies = [
  "anyhow",
  "async-trait",
  "axum",
  "bytes",
  "chrono",
+ "comfy-table",
+ "crossterm 0.27.0",
  "headers",
  "http",
  "http-body",
@@ -1882,13 +1975,16 @@ dependencies = [
  "opentelemetry-http",
  "opentelemetry-otlp",
  "pin-project",
- "prost-types",
+ "reqwest",
  "rmp-serde",
  "rustrict",
+ "semver",
  "serde",
  "serde_json",
  "strum",
  "thiserror",
+ "tokio",
+ "tonic",
  "tower",
  "tower-http",
  "tracing",
@@ -1900,9 +1996,9 @@ dependencies = [
 
 [[package]]
 name = "shuttle-poise"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d1d959c314be9c133271b08a64bbcbc59449b6391841e6c0d973b513d6ee9a9"
+checksum = "f6191e6231ed8d0ca981ffbf0723660337d399894072bceb1f534b2b8887c208"
 dependencies = [
  "poise",
  "shuttle-runtime",
@@ -1910,12 +2006,13 @@ dependencies = [
 
 [[package]]
 name = "shuttle-proto"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2ded5e27c6281d14d66f3970302c878472e82bce6c28e04e9e664c8eaa086054"
+checksum = "9e5729607532b40dcbc02171014b2743df75353fcbffed2360d85a5710406f1b"
 dependencies = [
  "anyhow",
  "chrono",
+ "dunce",
  "home",
  "prost",
  "prost-types",
@@ -1929,13 +2026,14 @@ dependencies = [
 
 [[package]]
 name = "shuttle-runtime"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f734c5310cfed64c86bddc32ae6c7e0cd6f773ecaf2a93370690cc13f0e7d8a"
+checksum = "07ac03e0200ed33e2d1d800b17ea543bf016028ffac601f9280a845bd13206a9"
 dependencies = [
  "anyhow",
  "async-trait",
  "chrono",
+ "colored",
  "prost-types",
  "serde",
  "serde_json",
@@ -1949,15 +2047,14 @@ dependencies = [
  "tokio-stream",
  "tonic",
  "tower",
- "tracing",
  "tracing-subscriber",
 ]
 
 [[package]]
 name = "shuttle-secrets"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a24e7bc76182802bddaaa184a8f55b9ff47a88a5463d641857c9480f86ae08a2"
+checksum = "04efaef2ceacb6034b5862821b0b64c968e567479cf9b6a1db2b05941b216099"
 dependencies = [
  "async-trait",
  "serde",
@@ -1966,9 +2063,9 @@ dependencies = [
 
 [[package]]
 name = "shuttle-serenity"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d51528255ea22722bd603ed28575178fcf3d954627d1b54a202784ddd704b993"
+checksum = "f3f54ff563bf2e9aadb64a147178c4cd277e23f28da3445c980c4d160a26427d"
 dependencies = [
  "serenity",
  "shuttle-runtime",
@@ -1976,9 +2073,9 @@ dependencies = [
 
 [[package]]
 name = "shuttle-service"
-version = "0.24.0"
+version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9853b0443da1b2040d6f46368872584c86aaad73219c60b3506251c4e77bbc9e"
+checksum = "ad233e7c899cf075c8a637e0c6535532ffdd36d02d10519868e90038c7a3da40"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1986,6 +2083,27 @@ dependencies = [
  "shuttle-common",
  "strfmt",
  "thiserror",
+]
+
+[[package]]
+name = "signal-hook"
+version = "0.3.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8621587d4798caf8eb44879d42e56b9a93ea5dcd315a6487c357130095b62801"
+dependencies = [
+ "libc",
+ "signal-hook-registry",
+]
+
+[[package]]
+name = "signal-hook-mio"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "29ad2e15f37ec9a6cc544097b78a1ec90001e9f71b81338ca39f430adaca99af"
+dependencies = [
+ "libc",
+ "mio",
+ "signal-hook",
 ]
 
 [[package]]
@@ -2541,6 +2659,12 @@ checksum = "5c5713f0fc4b5db668a2ac63cdb7bb4469d8c9fed047b1d0292cc7b0ce2ba921"
 dependencies = [
  "tinyvec",
 ]
+
+[[package]]
+name = "unicode-width"
+version = "0.1.11"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e51733f11c9c4f72aa0c160008246859e340b00807569a0da0e7a1079b27ba85"
 
 [[package]]
 name = "untrusted"
